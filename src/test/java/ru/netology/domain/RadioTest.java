@@ -20,50 +20,111 @@ public class RadioTest {
         assertEquals(expected, actual);
     }
 
-    @ParameterizedTest
-    @CsvFileSource(resources = "/dataNextRadioStation.csv")
-    void sholdNextRadioStation(int currentRadioStation, int expected) {
+    @Test
+    void sholdNextRadioStation() {
         Radio rad = new Radio();
 
-        rad.setNext(currentRadioStation);
+        rad.setCurrentRadioStation(1);
+
+        rad.setNext();
 
         int actual = rad.getCurrentRadioStation();
+        int expected = 2;
 
         assertEquals(expected, actual);
     }
 
-    @ParameterizedTest
-    @CsvFileSource(resources = "/dataPrevRadioStation.csv")
-    void sholdPrevRadioStation(int currentRadioStation, int expected) {
+    @Test
+    void sholdNextRadioStationFrom9To0() {
         Radio rad = new Radio();
 
-        rad.setPrev(currentRadioStation);
+        rad.setCurrentRadioStation(9);
+
+        rad.setNext();
 
         int actual = rad.getCurrentRadioStation();
+        int expected = 0;
 
         assertEquals(expected, actual);
     }
 
-    @ParameterizedTest
-    @CsvFileSource(resources = "/dataIncreaseVolume.csv")
-    void sholdIncreaseVolume(int currentVolume, int expected) {
+    @Test
+    void sholdPrevRadioStation() {
         Radio rad = new Radio();
 
-        rad.increaseVolume(currentVolume);
+        rad.setCurrentRadioStation(1);
 
-        int actual = rad.getCurrentVolume();
+        rad.setPrev();
+
+        int actual = rad.getCurrentRadioStation();
+        int expected = 0;
 
         assertEquals(expected, actual);
     }
 
-    @ParameterizedTest
-    @CsvFileSource(resources = "/dataReduceVolume.csv")
-    void sholdReduseVolume(int currentVolume, int expected) {
+    @Test
+    void sholdPrevRadioStationFrom0To9() {
         Radio rad = new Radio();
 
-        rad.reduceVolume(currentVolume);
+        rad.setCurrentRadioStation(0);
+
+        rad.setPrev();
+
+        int actual = rad.getCurrentRadioStation();
+        int expected = 9;
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void sholdIncreaseVolume() {
+        Radio rad = new Radio();
+
+        rad.increaseVolume();
 
         int actual = rad.getCurrentVolume();
+        int expected = 1;
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void sholdIncreaseVolumeFrom10() {
+        Radio rad = new Radio();
+
+        rad.setCurrentVolume(10);
+
+        rad.increaseVolume();
+
+        int actual = rad.getCurrentVolume();
+        int expected = 10;
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void sholdReduseVolume() {
+        Radio rad = new Radio();
+
+        rad.reduceVolume();
+
+        int actual = rad.getCurrentVolume();
+        int expected = 0;
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void sholdReduseVolumeFrom1() {
+        Radio rad = new Radio();
+
+        rad.setCurrentVolume(1);
+
+        rad.reduceVolume();
+
+
+        int actual = rad.getCurrentVolume();
+        int expected = 0;
 
         assertEquals(expected, actual);
     }

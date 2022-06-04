@@ -95,8 +95,6 @@ public class RadioTest {
         assertEquals(0, rad.getCurrentVolume());
     }
 
-
-
     Radio rad1 = new Radio(25);
     @Test
     void sholdNextRadioStationFrom24To0() {
